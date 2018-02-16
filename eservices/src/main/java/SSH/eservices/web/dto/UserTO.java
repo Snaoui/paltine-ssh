@@ -50,6 +50,7 @@ public class UserTO {
     }
 
     public User toUser(){
+        bCryptPasswordEncoder = new BCryptPasswordEncoder();
         User user = new User();
         user.setEmail(this.email);
         user.setPassword(bCryptPasswordEncoder.encode(password));
