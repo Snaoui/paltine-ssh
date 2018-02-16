@@ -9,7 +9,6 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -57,9 +56,9 @@ public class CustomUserDetailsService
 
 		List<String> roles = new ArrayList<>();
 		roles.add("ROLE_SIMPLE_USER");
-		if (SecurityContextHolder.getContext().getAuthentication() == null) {
+		/*if (SecurityContextHolder.getContext().getAuthentication() == null) {
 			internalSecurityByPass.byPass();
-		}
+		}*/
 
 		return new CustomUser(lowerCaseUserName, user.getPassword(), true,
 				AuthorityUtils.createAuthorityList(roles.toArray(new String[0])), authType);
