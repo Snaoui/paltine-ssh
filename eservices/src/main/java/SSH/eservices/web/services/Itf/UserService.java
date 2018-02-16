@@ -22,7 +22,7 @@ public interface UserService {
 
 	//List<User> getUserByRole(Role role);
 
-	User getUserByEmailAndPassword(String email, String password);
+	User getUserByEmailAndPassword(String email, String password) throws Exception;
 
 	boolean exists(String email);
 

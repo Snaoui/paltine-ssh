@@ -59,13 +59,28 @@ public class UserServiceImpl implements UserService {
 		return createdUser;
 	}
 
+	protected boolean exist(Role role) {
+		for (Role curRole : Role.values()) {
+			if (curRole.equals(role)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+
 	@Override
 	public User createUser(String email, String userName, String password, Role role) {
 		User user = new User();
 		user.setEmail(email);
 		user.setUsername(userName);
 		user.setPassword(password);
-		user.setUserRole(role);
+
+		if (role == null || !exist(role)) {
+			user.setUserRole(Role.SIMPLE_USER_ROLE);
+		} else {
+			user.setUserRole(role);
+		}
 		return this.createUser(user);
 	}
 
@@ -115,15 +130,10 @@ public class UserServiceImpl implements UserService {
 	}*/
 
 	@Override
-	public User getUserByEmailAndPassword(String email, String password) {
-		User foundedUser = null;
-		boolean exists = userRepository.findUserByEmailAndPassword(email, password);
-		if (exists) {
-			try {
-				foundedUser = userRepository.findByEmail(email);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+	public User getUserByEmailAndPassword(String email, String password) throws Exception {
+		User foundedUser = userRepository.findUserByEmailAndPassword(email, password);
+		if (foundedUser == null) {
+			throw new Exception("User not found !");
 		}
 		return foundedUser;
 	}

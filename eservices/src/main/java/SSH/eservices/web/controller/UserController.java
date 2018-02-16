@@ -4,11 +4,21 @@ import SSH.eservices.model.Course;
 import SSH.eservices.model.User;
 import SSH.eservices.web.dto.UserTO;
 import SSH.eservices.web.services.Itf.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "api/rest/model/")
@@ -43,7 +53,7 @@ public class UserController {
      * @return User corresponding to given credentials if exists
      */
     @PostMapping(path = "/login", produces = MediaType.APPLICATION_JSON_VALUE)
-    public User login(String email, String password) {
+    public User login(String email, String password) throws Exception {
         return userService.getUserByEmailAndPassword(email, password);
     }
 

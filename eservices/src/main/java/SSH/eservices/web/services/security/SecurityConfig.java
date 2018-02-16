@@ -9,7 +9,6 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @EnableWebSecurity
 @Configuration
@@ -35,7 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.roles("ADMIN","USER");*/
 	}
 
-	private String basePath = "/api/rest/model/";
+	private String basePath = "/api/rest/model";
 	@Override
 	public void configure(WebSecurity web) {
 		web.ignoring().antMatchers("/console", "/resources/**", "/static/**", "/css/**", "/js/**", "/images/**");
@@ -43,12 +42,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-				http.authorizeRequests().antMatchers("/").permitAll().and()
-				.authorizeRequests().antMatchers("/console/**").permitAll()
-						.and().authorizeRequests().antMatchers(basePath+"").permitAll()
-				.and().httpBasic()
-				.and().formLogin().loginPage("/login").permitAll()
-						.and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login");
+
+		http.authorizeRequests().antMatchers(basePath + "/login").permitAll()
+				.and().authorizeRequests().antMatchers("/console/**").permitAll()
+				.and().authorizeRequests().antMatchers(basePath + "/users/**").permitAll()
+				.and().httpBasic();
 		http.csrf().disable();
 		http.headers().frameOptions().disable();
 	}
