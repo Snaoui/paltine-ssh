@@ -15,7 +15,7 @@ public class UserTO {
     public String password;
     public String email;
 
-    public Role userRole;
+    public Role userRole = Role.SIMPLE_USER_ROLE;
 
     public String getUsername() {
         return username;
