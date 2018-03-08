@@ -54,7 +54,7 @@ public class UserTO {
         bCryptPasswordEncoder = new BCryptPasswordEncoder();
         User user = new User();
         user.setEmail(this.email);
-        user.setPassword(bCryptPasswordEncoder.encode(password));
+        user.setPassword(password);
         user.setUsername(this.username);
         user.setUserRole(this.userRole);
         return user;
