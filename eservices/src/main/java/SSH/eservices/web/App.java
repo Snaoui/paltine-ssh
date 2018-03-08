@@ -82,8 +82,8 @@ public class App
 
         Path p2 = new Path();
 
-        p2.setFrom(new Point(5.5, 6.6));
-        p2.setTo(new Point(7.7, 8.8));
+        p2.setFrom(new Point(50.609485775888054, 3.157536350190639));
+        p2.setTo(new Point(50.609485775888058, 3.157536350190629));
         p2 = pathRepository.save(p2);
         logger.info("path id " + p2.getId());
 
