@@ -1,6 +1,7 @@
 package SSH.eservices.model;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
@@ -12,19 +13,20 @@ import javax.persistence.*;
 @Entity
 public class Course {
     @Id
+    @GeneratedValue
     private int id;
     private String name;
-
-    @OneToOne
-    private Path path;
     private double duration;
     private double note;
-    @OneToMany
-    private  List<Comment> comments;
-    @ManyToOne
+
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<Comment> comments = new ArrayList<>();
+
+    @ManyToOne(fetch = FetchType.LAZY)
     private User courseCreator;
-    @OneToMany
-    List<Path> paths;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<Path> paths = new ArrayList<>();
 
     public String getName() {
         return name;
@@ -36,18 +38,6 @@ public class Course {
 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public Path getPath() {
-        return path;
-    }
-
-    public void setPath(Path path) {
-        this.path = path;
     }
 
     public double getDuration() {
@@ -82,7 +72,11 @@ public class Course {
         this.courseCreator = creator;
     }
 
-    public List<Path> getPaths() { return paths; }
+    public List<Path> getPaths() {
+        return paths;
+    }
 
-    public void setPaths(List<Path> paths) { this.paths = paths; }
+    public void setPaths(List<Path> paths) {
+        this.paths = paths;
+    }
 }

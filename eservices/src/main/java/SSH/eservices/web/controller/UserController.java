@@ -2,6 +2,7 @@ package SSH.eservices.web.controller;
 
 import SSH.eservices.model.Course;
 import SSH.eservices.model.User;
+import SSH.eservices.model.UserAuthentification;
 import SSH.eservices.web.dto.UserTO;
 import SSH.eservices.web.services.Itf.UserService;
 
@@ -48,13 +49,11 @@ public class UserController {
 
 
     /**
-     * @param email
-     * @param password
      * @return User corresponding to given credentials if exists
      */
     @PostMapping(path = "/login", produces = MediaType.APPLICATION_JSON_VALUE)
-    public User login(String email, String password) throws Exception {
-        return userService.getUserByEmailAndPassword(email, password);
+    public User login(@RequestBody UserAuthentification userAuthentification) throws Exception {
+        return userService.getUserByEmailAndPassword(userAuthentification.getEmail(), userAuthentification.getPassword());
     }
 
     /**
@@ -99,7 +98,7 @@ public class UserController {
      * @param userEmail
      * @return List of all courses belong to user #userEmail
      */
-    @GetMapping(path = "/courses/{email}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path = "/users/courses/{email}", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Course> getCourses(@PathVariable("email") String userEmail) throws Exception {
         return userService.listUserCourses(userEmail);
     }
