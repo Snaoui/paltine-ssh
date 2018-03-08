@@ -4,6 +4,7 @@ import SSH.eservices.model.Course;
 import SSH.eservices.web.dto.CourseTO;
 import SSH.eservices.web.services.Itf.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,7 +27,7 @@ public class CourseController {
      * @queryPath api/courses
      * @return
      */
-    @GetMapping(path = "/", produces = "application/json")
+    @GetMapping(path = "/", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Course> getAll() throws Exception {
         return courseService.getAll();
     }
@@ -38,7 +39,7 @@ public class CourseController {
      * @param id
      * @return course bean
      */
-    @GetMapping(path = "/{id}", produces = "application/json")
+    @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Course get(@PathVariable("id") int id) throws Exception {
         return courseService.get(id);
     }
@@ -51,7 +52,7 @@ public class CourseController {
      * @return
      */
     @ResponseBody
-    @PostMapping(path = "/", consumes = "application/json")
+    @PostMapping(path = "/", consumes = MediaType.APPLICATION_JSON_VALUE)
     public Course create(@RequestBody CourseTO courseTO) throws Exception {
         return courseService.create(courseTO);
     }
@@ -64,7 +65,7 @@ public class CourseController {
      * @return
      */
     @ResponseBody
-    @PutMapping(path = "/", consumes = "application/json")
+    @PutMapping(path = "/", consumes = MediaType.APPLICATION_JSON_VALUE)
     public Course edit(@RequestBody CourseTO courseTO) throws Exception {
         return courseService.edit(courseTO);
 
@@ -77,7 +78,7 @@ public class CourseController {
      * @return
      */
     @ResponseBody
-    @DeleteMapping(path = "/{id}", consumes = "application/json")
+    @DeleteMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public boolean post(@PathVariable("id") int id) throws Exception {
         return courseService.delete(id);
 

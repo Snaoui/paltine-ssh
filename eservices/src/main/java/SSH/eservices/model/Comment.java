@@ -1,9 +1,6 @@
 package SSH.eservices.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 /**
  * Commentaire
@@ -15,18 +12,16 @@ public class Comment {
     @GeneratedValue
     int id;
     String content;
+
     @ManyToOne
     Course course;
+
     @ManyToOne
     private User author;
 
 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getContent() {

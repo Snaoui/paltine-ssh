@@ -1,5 +1,6 @@
 package SSH.eservices.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
@@ -13,20 +14,16 @@ import org.springframework.data.geo.Point;
 public class Path {
     @Id
     @GeneratedValue
-    int id;
+    private int id;
     @Column(name = "pointTo")
-    Point to;
+    private Point to;
     @Column(name = "pointFrom")
-    Point from;
-    @OneToMany
-    List<Survey> surveys;
+    private Point from;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Survey> surveys = new ArrayList<>();;
 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public Point getTo() {
