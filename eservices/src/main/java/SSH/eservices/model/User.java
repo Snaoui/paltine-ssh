@@ -3,12 +3,7 @@ package SSH.eservices.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -23,9 +18,6 @@ public class User {
     @Id
     @Column(nullable = false)
     private String email;
-
-    @OneToMany
-    private List<Course> courses = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
     private Role userRole;
@@ -63,14 +55,6 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public List<Course> getCourses() {
-        return courses;
-    }
-
-    public void setCourses(List<Course> courses) {
-        this.courses = courses;
     }
 
     public User(){}

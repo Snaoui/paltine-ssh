@@ -57,7 +57,7 @@ public class SurveyServiceImpl implements SurveyService {
      */
     @Override
 		public Survey create(SurveyTO surveyTO) throws Exception {
-        if (surveyTO == null || surveyTO.getPathId() == Integer.valueOf( null ) || surveyTO.getSurvey() == null) {
+        if (surveyTO == null || surveyTO.getSurvey() == null) {
             throw new IllegalArgumentException( "Invalid arguments" );
         }
 			return createSurvey(surveyTO);

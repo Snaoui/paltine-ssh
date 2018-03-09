@@ -4,7 +4,9 @@ import SSH.eservices.model.Course;
 import SSH.eservices.model.User;
 import org.springframework.data.repository.CrudRepository;
 
+import java.util.List;
+
 public interface CourseRepository
 		extends CrudRepository<Course, Integer> {
-	Course findCourseByCourseCreatorIsAndName(User user,String name);
+	List <Course> findCourseByCourseCreator(User user);
 }

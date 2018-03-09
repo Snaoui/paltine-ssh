@@ -18,6 +18,7 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import static org.slf4j.LoggerFactory.getLogger;
@@ -34,10 +35,13 @@ public class UserServiceImpl implements UserService {
 	CourseRepository courseRepository;
 
 	@Autowired
-	BCryptPasswordEncoder bCryptPasswordEncoder;
+	PasswordEncoder passwordEncoder;
 
 	@PersistenceContext
 	private EntityManager entityManager;
+
+	@Autowired
+	private PasswordEncoder encoder;
 
 
 
@@ -51,7 +55,7 @@ public class UserServiceImpl implements UserService {
 			throw new IllegalArgumentException("User with email ["+ newUser.getEmail()+"] already exists");
 		}
 		try{
-			newUser.setPassword(bCryptPasswordEncoder.encode(newUser.getPassword()));
+			newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
 			createdUser = userRepository.save(newUser);
 		}catch (Exception e){
 			e.printStackTrace();
@@ -89,8 +93,7 @@ public class UserServiceImpl implements UserService {
 		User foundedUser = getUserByEmail(userToEdit.getEmail());
 		foundedUser.setUsername(userToEdit.getUsername());
 		foundedUser.setEmail(userToEdit.getEmail());
-		foundedUser.setPassword(bCryptPasswordEncoder.encode(userToEdit.getPassword()));
-		foundedUser.setCourses(userToEdit.getCourses());
+		foundedUser.setPassword(passwordEncoder.encode(userToEdit.getPassword()));
 		foundedUser.setUserRole(userToEdit.getUserRole());
 		return entityManager.merge(foundedUser);
 	}
@@ -131,9 +134,11 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User getUserByEmailAndPassword(String email, String password) throws Exception {
-		User foundedUser = userRepository.findUserByEmailAndPassword(email, password);
+		User foundedUser = userRepository.findByEmail(email);
 		if (foundedUser == null) {
 			throw new Exception("User not found !");
+		}else if(!encoder.matches(password, foundedUser.getPassword())){
+			throw new Exception("User not found: bad credentials !");
 		}
 		return foundedUser;
 	}
@@ -153,11 +158,12 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<Course> listUserCourses(String email) throws Exception {
 		User user = userRepository.findOne(email);
+		List<Course> courses = courseRepository.findCourseByCourseCreator(user);
 		if(user==null) {
 			throw new Exception("Can not get course list: User not found");
 		}
 		else{
-			return user.getCourses();
+			return courses;
 		}
 	}
 }

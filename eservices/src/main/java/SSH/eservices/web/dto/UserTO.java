@@ -5,11 +5,12 @@ import SSH.eservices.model.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 public class UserTO {
 
     @Autowired
-    BCryptPasswordEncoder bCryptPasswordEncoder;
+    PasswordEncoder bCryptPasswordEncoder;
 
     public String username;
     public String password;
@@ -53,7 +54,7 @@ public class UserTO {
         bCryptPasswordEncoder = new BCryptPasswordEncoder();
         User user = new User();
         user.setEmail(this.email);
-        user.setPassword(bCryptPasswordEncoder.encode(password));
+        user.setPassword(password);
         user.setUsername(this.username);
         user.setUserRole(this.userRole);
         return user;
