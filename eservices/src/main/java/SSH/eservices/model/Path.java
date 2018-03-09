@@ -19,8 +19,12 @@ public class Path {
     private Point to;
     @Column(name = "pointFrom")
     private Point from;
+    private int index;
+    private boolean isVisited = false;
+    private boolean isBeginning = false;
+    private boolean isFinish = false;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<Survey> surveys = new ArrayList<>();;
+    private List<Survey> surveys = new ArrayList<>();
 
     public int getId() {
         return id;
@@ -48,5 +52,38 @@ public class Path {
 
     public void setSurveys(List<Survey> surveys) {
         this.surveys = surveys;
+    }
+
+
+    public boolean isVisited() {
+        return isVisited;
+    }
+
+    public void setVisited(boolean visited) {
+        isVisited = visited;
+    }
+
+    public boolean isBeginning() {
+        return isBeginning;
+    }
+
+    public void setBeginning(boolean begin) {
+        isBeginning = begin;
+    }
+
+    public boolean isFinish() {
+        return isFinish;
+    }
+
+    public void setFinish(boolean finish) {
+        isFinish = finish;
+    }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
     }
 }

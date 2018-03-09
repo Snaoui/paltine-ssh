@@ -3,21 +3,18 @@ package SSH.eservices.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import java.util.List;
+import javax.persistence.ManyToOne;
 
-/**
- * Questionnaire
- */
 @Entity
-public class Survey {
+public class Answer {
+
     @Id
     @GeneratedValue
     int id;
     private String label;
-
-    @OneToMany
-    List<Answer> answers;
+    private boolean isCorrect;
+    @ManyToOne
+    Survey survey;
 
     public int getId() {
         return id;
@@ -31,11 +28,20 @@ public class Survey {
         this.label = label;
     }
 
-    public List<Answer> getAnswers() {
-        return answers;
+    public boolean isCorrect() {
+        return isCorrect;
     }
 
-    public void setAnswers(List<Answer> answers) {
-        this.answers = answers;
+    public void setCorrect(boolean correct) {
+        isCorrect = correct;
     }
+
+    public Survey getSurvey() {
+        return survey;
+    }
+
+    public void setSurvey(Survey survey) {
+        this.survey = survey;
+    }
+
 }
