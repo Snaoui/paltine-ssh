@@ -8,7 +8,7 @@ import javax.persistence.*;
 import org.springframework.data.geo.Point;
 
 /**
- * Trajet
+ * Trajethr
  */
 @Entity(name = "trajet")
 public class Path {
@@ -19,7 +19,7 @@ public class Path {
     private Point to;
     @Column(name = "pointFrom")
     private Point from;
-    private int index;
+    private int index = -1;
     private boolean isVisited = false;
     private boolean isBeginning = false;
     private boolean isFinish = false;
