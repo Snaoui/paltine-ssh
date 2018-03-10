@@ -89,6 +89,8 @@ public class App
 
         p2.setFrom(new Point(50.609485775888054, 3.157536350190639));
         p2.setTo(new Point(50.609485775888058, 3.157536350190629));
+        p2.setBeginning(true);
+        p2.setIndex(0);
         p2 = pathRepository.save(p2);
         logger.info("path id " + p2.getId());
 
@@ -98,13 +100,13 @@ public class App
         answer1.setLabel("Response 1");
         answer1.setCorrect(true);
         answerRepository.save(answer1);
-        Answer answer2  = new Answer();
+        Answer answer2 = new Answer();
         answer2.setLabel("Response 2");
         answerRepository.save(answer2);
-        Answer answer3  = new Answer();
+        Answer answer3 = new Answer();
         answer3.setLabel("Response 3");
         answerRepository.save(answer3);
-        Answer answer4  = new Answer();
+        Answer answer4 = new Answer();
         answer4.setLabel("Response 4");
         answerRepository.save(answer4);
         List<Answer> answers = new ArrayList<>();
@@ -121,13 +123,13 @@ public class App
         answer5.setLabel("Response 1");
         answer5.setCorrect(true);
         answerRepository.save(answer5);
-        Answer answer6  = new Answer();
+        Answer answer6 = new Answer();
         answer6.setLabel("Response 2");
         answerRepository.save(answer6);
-        Answer answer7  = new Answer();
+        Answer answer7 = new Answer();
         answer7.setLabel("Response 3");
         answerRepository.save(answer7);
-        Answer answer8  = new Answer();
+        Answer answer8 = new Answer();
         answer8.setLabel("Response 4");
         answerRepository.save(answer8);
         answers.clear();
@@ -162,7 +164,7 @@ public class App
         answer9.setLabel("Response 1");
         answer9.setCorrect(true);
         answerRepository.save(answer9);
-        Answer answer10  = new Answer();
+        Answer answer10 = new Answer();
         answer10.setLabel("Response 2");
         answerRepository.save(answer10);
         Answer answer11 = new Answer();
@@ -186,13 +188,13 @@ public class App
         answer13.setLabel("Response 1");
         answer13.setCorrect(true);
         answerRepository.save(answer13);
-        Answer answer14  = new Answer();
+        Answer answer14 = new Answer();
         answer14.setLabel("Response 2");
         answerRepository.save(answer14);
-        Answer answer15  = new Answer();
+        Answer answer15 = new Answer();
         answer15.setLabel("Response 3");
         answerRepository.save(answer15);
-        Answer answer16  = new Answer();
+        Answer answer16 = new Answer();
         answer16.setLabel("Response 4");
         answerRepository.save(answer16);
         answers.clear();
@@ -208,7 +210,8 @@ public class App
 
         p.setFrom(new Point(50.609485775888034, 3.157536350190239));
         p.setTo(new Point(50.609485765888054, 3.157536350191639));
-
+        p.setFinish(true);
+        p.setIndex(1);
         p = pathRepository.save(p);
         logger.info("path id " + p.getId());
 
