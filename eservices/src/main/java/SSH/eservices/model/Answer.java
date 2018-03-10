@@ -13,8 +13,6 @@ public class Answer {
     int id;
     private String label;
     private boolean isCorrect;
-    @ManyToOne
-    Survey survey;
 
     public int getId() {
         return id;
@@ -34,14 +32,6 @@ public class Answer {
 
     public void setCorrect(boolean correct) {
         isCorrect = correct;
-    }
-
-    public Survey getSurvey() {
-        return survey;
-    }
-
-    public void setSurvey(Survey survey) {
-        this.survey = survey;
     }
 
 }
