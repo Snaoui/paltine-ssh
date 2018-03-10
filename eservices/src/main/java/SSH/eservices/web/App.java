@@ -212,6 +212,7 @@ public class App
         p.setTo(new Point(50.609485765888054, 3.157536350191639));
         p.setFinish(true);
         p.setIndex(1);
+       
         p = pathRepository.save(p);
         logger.info("path id " + p.getId());
 
